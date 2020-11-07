@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {AuthContext} from '../navigation/AuthProvider';
 import FormButton from '../components/FormButton';
 import InputField from '../components/InputField';
 
-export default function SignupScreen() {
+export default function SignupScreen({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const {register} = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -14,17 +17,20 @@ export default function SignupScreen() {
         autoCapitalize="none"
         autoCorrect={false}
         keyboardType="email-address"
-        onChangeText={e => setEmail(e.target.value)}
+        onChangeText={text => setEmail(text)}
         placeholderText="Email"
         value={email}
       />
       <InputField
-        onChangeText={e => setPassword(e.target.value)}
+        onChangeText={text => setPassword(text)}
         placeholderText="Password"
         secureTextEntry={true}
         value={password}
       />
-      <FormButton buttonTitle="Signup" onPress={() => alert('sign button')} />
+      <FormButton
+        buttonTitle="Signup"
+        onPress={() => register(email, password)}
+      />
     </View>
   );
 }

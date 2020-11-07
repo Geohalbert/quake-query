@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {AuthContext} from '../navigation/AuthProvider';
 import FormButton from '../components/FormButton';
 import InputField from '../components/InputField';
 
 export default function LoginScreen({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const {login} = useContext(AuthContext);
 
   return (
     <View style={styles.loginContainer}>
@@ -14,17 +17,17 @@ export default function LoginScreen({navigation}) {
         autoCapitalize="none"
         autoCorrect={false}
         keyboardType="email-address"
-        onChangeText={e => setEmail(e.target.value)}
+        onChangeText={text => setEmail(text)}
         placeholderText="Email"
         value={email}
       />
       <InputField
-        onChangeText={e => setPassword(e.target.value)}
+        onChangeText={text => setPassword(text)}
         placeholderText="Password"
         secureTextEntry={true}
         value={password}
       />
-      <FormButton buttonTitle="Login" onPress={() => alert('login button')} />
+      <FormButton buttonTitle="Login" onPress={() => login(email, password)} />
       <TouchableOpacity
         style={styles.navButton}
         onPress={() => navigation.navigate('Signup')}>

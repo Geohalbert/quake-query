@@ -42,7 +42,7 @@ export default function InputField(props) {
         autoCorrect={autoCorrect}
         keyboardType={keyboardType}
         onBlur={() => onChangeFocus(false)}
-        onChangeText={e => onChangeText(e.target.value)}
+        onChangeText={text => onChangeText(text)}
         onFocus={() => onChangeFocus(true)}
         placeholderText={placeholderText}
         secureTextEntry={secureTextEntry}
