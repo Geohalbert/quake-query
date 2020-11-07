@@ -4,7 +4,8 @@ import {Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
 const {width} = Dimensions.get('window');
 export default function InputField(props) {
   const {
-    autoCompleteType,
+    autoCapitalize,
+    autoCorrect,
     error,
     errorMessage,
     helperText,
@@ -12,6 +13,8 @@ export default function InputField(props) {
     keyboardType,
     label,
     onChangeText,
+    placeholderText,
+    secureTextEntry,
     style,
     value,
     ...rest
@@ -35,13 +38,15 @@ export default function InputField(props) {
     <View style={styles.inputContainer}>
       <Text style={styles.label}>{labelText}</Text>
       <TextInput
+        autoCapitalize={autoCapitalize}
+        autoCorrect={autoCorrect}
         keyboardType={keyboardType}
-        multiline={isNotesField}
-        style={stylesArr}
+        onBlur={() => onChangeFocus(false)}
         onChangeText={e => onChangeText(e.target.value)}
         onFocus={() => onChangeFocus(true)}
-        onBlur={() => onChangeFocus(false)}
-        autoCompleteType={autoCompleteType}
+        placeholderText={placeholderText}
+        secureTextEntry={secureTextEntry}
+        style={stylesArr}
         value={value}
         {...rest}
       />
